@@ -157,4 +157,18 @@ elif (funcao == "3"):
 	print("Matriz X: \n", matrix_X)
 	print("Somatorio: \n", somatorio)
 	print("Coeficientes: \n", coeficientes) #primeiro coeficiente é termo independente e demais são x1, x2... xn
+
+	result = 0
+	i = 0
+	for i in range(0, grau):
+		result += coeficientes[i]*pow(x, i)
+
+	print(result)
+
+	plt.plot( x, y, 'go', x, result, "-b") # linha azul com bolinhas verdes
+	plt.title("Reta com o mínimo erro")
+	plt.grid(True)
+	plt.xlabel("x")
+	plt.ylabel("y")
+	plt.show()
 	

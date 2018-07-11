@@ -31,6 +31,8 @@ Argumentos:
 #python3 MMQ.py -l 4 -c 2 -f 2 -v 1 2 3 4 3 5 6 8
 #python3 MMQ.py -l 4 -c 1 -f 2 -v -1.5 -0.5 1.25 1.5 1.15 -0.37 0.17 0.94
 
+#python3 MMQ.py -l 8 -c 3 -f 2 -v -1 0 1 2 4 5 5 6 -2 -1 0 1 1 2 3 4 13 11 9 4 11 9 1 -1
+
 #python3 MMQ.py -l 6 -c 2 -f 3 -g 2 -v -2.0 -1.5 0.0 1.0 2.2 3.1 -30.5 -20.2 -3.3 8.9 16.8 21.4
 
 import argparse
@@ -125,6 +127,21 @@ elif (funcao == "2"):
 	print("Matriz X: \n", matrix_X)
 	print("Somatorio: \n", somatorio)
 	print("Coeficientes: \n", coeficientes) #primeiro coeficiente é termo independente e demais são x1, x2... xn
+
+	result = 0
+	i = 0
+	result += coeficientes[0]
+	for i in range(1, num_eq-1):
+		result += coeficientes[i]*np.array(x[i-1])
+
+	print(result)
+
+	plt.plot(x, result, "-b") # linha azul com bolinhas verdes
+	plt.title("Reta com o mínimo erro")
+	plt.grid(True)
+	plt.xlabel("x")
+	plt.ylabel("y")
+	plt.show()
 
 elif (funcao == "3"):
 	#Pega o grau do polinomio que se deseja ajustar

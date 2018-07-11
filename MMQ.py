@@ -29,6 +29,8 @@ Argumentos:
 #python3 MMQ.py -l 4 -c 2 -f 2 -v 1 2 3 4 3 5 6 8
 #python3 MMQ.py -l 4 -c 1 -f 2 -v -1.5 -0.5 1.25 1.5 1.15 -0.37 0.17 0.94
 
+#python3 MMQ.py -l 6 -c 2 -f 3 -v -2.0 -1.5 0.0 1.0 2.2 3.1 -30.5 -20.2 -3.3 8.9 16.8 21.4
+
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
@@ -120,4 +122,44 @@ elif (funcao == "2"):
 	print("Matriz X: \n", matrix_X)
 	print("Somatorio: \n", somatorio)
 	print("Coeficientes: \n", coeficientes) #primeiro coeficiente é termo independente e demais são x1, x2... xn
+
+elif (funcao == "3"):
+	#Implementacao da curva
+	num_eq = int(args["c"]) + 1 #numero total de equações (número de colunas + 1)
+	
+	#x contem o valor dos x (x = numero de equações-1)
+	x = np.zeros(shape=[int(args["c"]), int(args["l"])])
+	k = 0
+
+	for i in range(x.shape[0]):
+		for j in range(x.shape[1]):
+			x[i][j] = valores[k]
+			k = k + 1
+
+	#y são os ultimos valores de valores
+	y = np.zeros(shape=[1, int(args["l"])])
+	y = valores[k:len(valores)]
+
+	matrix_X = np.zeros(shape=[num_eq, num_eq]) 
+
+	#Cria primeira linha e primeira coluna	
+	matrix_X[0][0] = n
+	for i in range(0, matrix_X.shape[0]):
+		for j in range(1, matrix_X.shape[1]):
+			#primeira linha
+			matrix_X[i][j] = round(sum(pow(x[0], j+i)), 2)
+			matrix_X[j][i] = round(sum(pow(x[0], j+i)), 2)		
+
+	somatorio = np.zeros(shape=[num_eq,1]) 
+	somatorio[0] = sum(y)
+	for i in range(0, num_eq-1):
+		somatorio[i+1] = round(sum(pow(x[0], i)*y), 2)
+
+	#coeficientes = lu_solve(lu_factor(matrix_X), somatorio) #resolve sistema linear por LU
+
+	print("X: \n", x)
+	print("Y: \n", y)
+	print("Matriz X: \n", matrix_X)
+	print("Somatorio: \n", somatorio)
+	#print("Coeficientes: \n", coeficientes) #primeiro coeficiente é termo independente e demais são x1, x2... xn
 	

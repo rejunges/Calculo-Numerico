@@ -21,18 +21,16 @@ Argumentos:
 		O Grau deve ser fornecido se a função for polinomial, informando qual é o grau do polinomio que se deseja ajustar a função
 """
 
-#Testes para a funções de reta
+#Testes para a função 1
 #python3 MMQ.py -l 5 -c 2 -f 1 -v 0.30 2.75 4.50 5.95 7.80 1.80 1.90 3.10 3.90 3.30
 #python3 MMQ.py -l 10 -c 2 -f 1 -v 1 2 3 4 5 6 7 8 9 10 1.3 3.5 4.2 5 7 8.8 10.1 12.5 13 15.6
 #python3 MMQ.py -l 4 -c 2 -f 1 -v 1 2 3 4 3 5 6 8
-#python3 MMQ.py -l 3 -c 2 -f 1 -v 0.23 -0.3 0.04 -0.54 -0.54 -0.57
 
-#python3 MMQ.py -l 12 -c 2 -f 2 -v 100 90 80 70 70 70 70 65 60 60 55 50 550 630 720 700 625 735 560 715 750 690 715 650 55 70 90 100 90 105 80 110 125 115 130 130
-#python3 MMQ.py -l 4 -c 2 -f 2 -v 1 2 3 4 3 5 6 8
+#Testes para a função 2
 #python3 MMQ.py -l 4 -c 1 -f 2 -v -1.5 -0.5 1.25 1.5 1.15 -0.37 0.17 0.94
-
 #python3 MMQ.py -l 8 -c 2 -f 2 -v -1 0 1 2 4 5 5 6 -2 -1 0 1 1 2 3 4 13 11 9 4 11 9 1 -1
 
+#Testes para a função 3
 #python3 MMQ.py -l 6 -c 2 -f 3 -g 2 -v -2.0 -1.5 0.0 1.0 2.2 3.1 -30.5 -20.2 -3.3 8.9 16.8 21.4
 
 import argparse

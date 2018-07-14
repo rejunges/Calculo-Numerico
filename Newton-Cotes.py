@@ -66,7 +66,7 @@ def regra_trapezio(x):
 
 	eT = -(pow(h,3)/12) - derivada.subs(y, (x[0] + x[1])/2).doit() #utiliza derivada segunda com o valor de c(média entre x0 e x1) 
 	print("Regra Trapézio:", trapezioB)
-	print("Erro to Trapézio: ", eT)
+	print("Erro do Trapézio: ", eT)
 	
 def regra_simpson(x):
 	y = []
@@ -86,11 +86,25 @@ def regra_simpson(x):
 
 	simpson = (h/3)*(y[0] + 4*y[1] + y[2]) 
 
+	#erro do simpson 
+	y = Symbol("x")
+	f = parse_expr(funcao)
+	derivada = diff(f,y,4)
+	
+	eS = -(pow(h,5)/90) - derivada.subs(y, (x[0] + x[2])/2).doit() #utiliza derivada segunda com o valor de c(média entre x0 e x1) 
+
 	print("Regra Simpson:", simpson)
+	print("Erro do Simpson : ", eS)
 	
 
 def regra_romberg(x):
-	return 0
+	y = []
+	i = 0
+	for i in range(0, len(x)):
+		y.append(eval(funcao.replace("x", str(x[i]))))
+
+	R00 = 0.5 * (x[1] - x[0]) * (y[0] + y[1])
+
 
 if (r == 1):
 	regra_trapezio(x)

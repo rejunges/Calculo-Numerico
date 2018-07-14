@@ -18,16 +18,16 @@ Argumentos:
 		3 para Romberg
 """
 
-#python3 Newton-Cotes.py -x 1 0.5 "-f" "pow(x,4)" -r 1
-#python3 Newton-Cotes.py -x 0.5 0 1 "-f" "2/x-4" -r 2
-#python3 Newton-Cotes.py -x 0 2 1 1 "-f" "pow(x,2)*pow(e,pow(x,2))" -r 3
+#python3 Newton-Cotes.py -x 1 0.5 -f "pow(x,4)" -r 1
+#python3 Newton-Cotes.py -x 0.5 0 1 -f "2/x-4" -r 2
+#python3 Newton-Cotes.py -x 0 2 1 1 -f "pow(x,2)*pow(e,pow(x,2))" -r 3
 
 
 import argparse
 import matplotlib.pyplot as plt
 import numpy as np
 import math
-from scipy.linalg import lu_factor, lu_solve
+from sympy import *
 
 # Leitura dos argumentos por linha de comando
 ap = argparse.ArgumentParser()
@@ -52,14 +52,26 @@ def regra_trapezio(x):
 		y.append(eval(funcao.replace("x", str(x[i]))))
 
 	trapezio = np.trapz(y, x)
-	print("Regra Trapézio:", trapezio)
+	np.trapz(y,x)
 
+	#trapezio calculado com a formula
+	h = x[1] - x[0]
+	trapezioB = (h/2)*(y[0] + y[1]) 
+
+	#erro do trapezio 
+	x = Symbol("x")
+	#derivada = diff(funcao,x)
+	#print(derivada)
+	#print("Aqui:", derivada.subs(x, 0.75).doit())
+	#eT = -(pow(h,3)/12)
+	print("Regra Trapézio:", trapezio, trapezioB)
+	#print(eT)
+	
 def regra_simpson(x):
 	return 0
 
 def regra_romberg(x):
 	return 0
-
 
 if (r == 1):
 	regra_trapezio(x)

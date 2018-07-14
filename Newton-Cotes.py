@@ -123,7 +123,7 @@ def regra_romberg(x,n, funcao):
 	
 	R[0][0] = trap_romb(x,h,funcao)
 	funcao = funcao.replace("e", "2.718")
-	
+	erro = 0
 	for i in range(1,n): #linha
 		#somatorio pra adicionar no R[i][0]
 		somatorio = 0
@@ -135,13 +135,16 @@ def regra_romberg(x,n, funcao):
 		R[i][0] = (1/2)* R[i-1,0] + hn * somatorio
 	
 	for i in range(1, n): #linha
+		hn = h/pow(2,i)
+		erro += pow(hn, 2*i +2)
 		for j in range(1,i+1): #coluna
 			R[i][j] = (1/(pow(4,j)-1)) * (pow(4,j)*R[i, j-1] - R[i-1, j-1])
 	
 	print("\n-----------------------Matriz Inferior dos valores de Romberg-------------\n")
 	print(R)
 	print("\n-------------------")
-	print("\nRomberg: ", R[n-1][n-1])
+	print("\nMétodo do Romberg: ", R[n-1][n-1])
+	print("Erro do Romberg: ", erro)
 
 if (r == 1):
 	regra_trapezio(x)

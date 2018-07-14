@@ -31,16 +31,37 @@ ap.add_argument('-f', "--f", required=True, help="Funcao")
 
 args = vars(ap.parse_args())
 x = args["x"]
-h = args["h"]
+h = float(args["h"])
 f = args["f"]
 
+print("---------------------------- Entradas ----------------------------\n")
 print("X: ", x)
 print("H: ", h)
 print("F: ", f)
 
-fx = []
+#assumo que fx contém os valores da função desde fx(x-5), fx(x-4), fx(x-3), fx(x-2), fx(x-1) até fx(x+5)
+fx = np.array([1, 2, 3, 4, 5, 6, 30, 8, 9, 10, 11])
+tam = len(fx)//2
 
-def progressiva(fx):
-	return 0
+progressiva = []
+
+def dev_progressiva(fx):
+	#primeira derivada
+	progressiva.append(float(fx[tam+1] + fx[tam])/h)
+
+	#segunda derivada
+	progressiva.append(float(fx[tam+2]-2*fx[tam+1]+fx[tam])/pow(h,2))
+
+	#terceira derivada
+	progressiva.append(float(fx[tam+3] - 3*fx[tam+2] + 3*fx[tam+1] - fx[tam])/pow(h,3))
+
+	#quarta derivada
+	progressiva.append(float(fx[tam+4] - 4*fx[tam+3] + 6*fx[tam+2] - 4*fx[tam+1] + fx[tam])/pow(h,4))
+
+	i = 0
+	print("---------------------------- Derivada Progressiva ----------------------------\n")
+	for i in range(0, len(progressiva)):
+		print("derivada", i+1, ": ", progressiva[i])
 
 
+dev_progressiva(fx)

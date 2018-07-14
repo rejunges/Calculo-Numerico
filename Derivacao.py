@@ -34,16 +34,19 @@ x = args["x"]
 h = float(args["h"])
 f = args["f"]
 
-print("---------------------------- Entradas ----------------------------\n")
+print("\n ---------------------------- Entradas ----------------------------\n")
 print("X: ", x)
 print("H: ", h)
 print("F: ", f)
 
 #assumo que fx contém os valores da função desde fx(x-5), fx(x-4), fx(x-3), fx(x-2), fx(x-1) até fx(x+5)
-fx = np.array([1, 2, 3, 4, 5, 6, 30, 8, 9, 10, 11])
+fx = np.array([1, 2, 20, 4, 5, 50, 30, 8, 9, 10, 11])
 tam = len(fx)//2
 
+#crio as listas para armazenar as derivadas
 progressiva = []
+regressiva = []
+centrada = []
 
 def dev_progressiva(fx):
 	#primeira derivada
@@ -59,9 +62,46 @@ def dev_progressiva(fx):
 	progressiva.append(float(fx[tam+4] - 4*fx[tam+3] + 6*fx[tam+2] - 4*fx[tam+1] + fx[tam])/pow(h,4))
 
 	i = 0
-	print("---------------------------- Derivada Progressiva ----------------------------\n")
+	print("\n---------------------------- Derivada Progressiva ----------------------------\n")
 	for i in range(0, len(progressiva)):
-		print("derivada", i+1, ": ", progressiva[i])
+		print(i+1,"º derivada:", progressiva[i])
 
+def dev_regressiva(fx):
+	#primeira derivada
+	regressiva.append(float(fx[tam] - fx[tam-1])/h)
+
+	#segunda derivada
+	regressiva.append(float(fx[tam]-2*fx[tam-1]+fx[tam-2])/pow(h,2))
+
+	#terceira derivada
+	regressiva.append(float(fx[tam] - 3*fx[tam-1] + 3*fx[tam-2] - fx[tam-3])/pow(h,3))
+
+	#quarta derivada
+	regressiva.append(float(fx[tam] - 4*fx[tam-1] + 6*fx[tam-2] - 4*fx[tam-3] + fx[tam-4])/pow(h,4))
+
+	i = 0
+	print("\n---------------------------- Derivada Regressiva ----------------------------\n")
+	for i in range(0, len(regressiva)):
+		print(i+1,"º derivada:", regressiva[i])
+
+def dev_centrada(fx):
+	#primeira derivada
+	centrada.append(float(fx[tam+1] - fx[tam-1])/2*h)
+
+	#segunda derivada
+	centrada.append(float(fx[tam+1]-2*fx[tam]+fx[tam-1])/pow(h,2))
+
+	#terceira derivada
+	centrada.append(float(fx[tam+2] - 2*fx[tam+1] + 2*fx[tam-1] - fx[tam-2])/(2*pow(h,3)))
+
+	#quarta derivada
+	centrada.append(float(fx[tam+2] - 4*fx[tam+1] + 6*fx[tam] - 4*fx[tam-1] + fx[tam-2])/pow(h,4))
+
+	i = 0
+	print("\n----------------------------- Derivada Centrada -----------------------------\n")
+	for i in range(0, len(centrada)):
+		print(i+1,"º derivada:", centrada[i])
 
 dev_progressiva(fx)
+dev_regressiva(fx)
+dev_centrada(fx)

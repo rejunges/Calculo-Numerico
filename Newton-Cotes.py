@@ -19,7 +19,7 @@ Argumentos:
 """
 
 #python3 Newton-Cotes.py -x 1 0.5 -f "pow(x,4)" -r 1
-#python3 Newton-Cotes.py -x 0.5 0 1 -f "2/x-4" -r 2
+#python3 Newton-Cotes.py -x 0.5 0 -f "2/(x-4)" -r 2
 #python3 Newton-Cotes.py -x 0 2 1 1 -f "pow(x,2)*pow(e,pow(x,2))" -r 3
 
 
@@ -68,7 +68,25 @@ def regra_trapezio(x):
 	#print(eT)
 	
 def regra_simpson(x):
-	return 0
+	y = []
+	x_linha = []
+	i = 0
+
+	#calculo a distância de cada intervalo
+	h = round((x[1] - x[0])/2, 2)
+
+	x_linha.append(x[0])
+	x_linha.append(x[0]+h)
+	x_linha.append(x[1])
+
+	i = 0
+	for i in range(0, len(x_linha)):
+		y.append(eval(funcao.replace("x", str(x_linha[i]))))	
+
+	simpson = (h/3)*(y[0] + 4*y[1] + y[2]) 
+
+	print("Regra Simpson:", simpson)
+	
 
 def regra_romberg(x):
 	return 0

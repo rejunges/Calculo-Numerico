@@ -21,7 +21,7 @@ Argumentos:
 
 #python3 Newton-Cotes.py -x 1 0.5 -f "x**4" -r 1
 #python3 Newton-Cotes.py -x 0.5 0 -f "(2/(x-4))" -r 2
-#python3 Newton-Cotes.py -x 0 2 -f "(x**2*(e**(x**2)))" -r 3 -n 12 
+#python3 Newton-Cotes.py -x 0 2 -f "(x**2*(e**(x**2)))" -r 3 -n 6 
 #python3 Newton-Cotes.py -x 0 2 -f "(e**(x**2))" -r 3 -n 3 
 
 import argparse
@@ -129,7 +129,7 @@ def regra_romberg(x,n, funcao):
 		somatorio = 0
 		hn = h/pow(2,i)
 		for j in range(1, pow(2, i-1)):
-			xa = x[0] + (2*j - 1)* hn
+			xa = x[0] + (2*(j+1) - 1)* hn
 			somatorio += eval(funcao.replace("x", str(xa)))
 			
 		R[i][0] = (1/2)* R[i-1,0] + hn * somatorio

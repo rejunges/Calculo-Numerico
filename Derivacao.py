@@ -18,6 +18,7 @@ Argumentos:
 #python3 Derivacao.py -x 0.5 -H 0.5 -f "(2/x-4)"
 #python3 Derivacao.py -x 0.5 -H 0.25 -f "(-0.1*pow(x,4)-0.15*pow(x,3)-0.5*pow(x,2)-0.25*x+1.2)"
 #python3 Derivacao.py -x 2 -H 0.25 -f "(pow(x,2)-1*2)"
+#python3 Derivacao.py -x 1 -H 0.1 -f "(math.cos(x))"
 
 
 import argparse
@@ -41,7 +42,7 @@ f = args["f"]
 fx = []
 
 for i in range(-5, 6):
-	fx.append(eval(f.replace("x", str(x+i)))) #Faz o valor de x ocupar o "x" da função e faz com que essa string seja computada
+	fx.append(eval(f.replace("x", str(x+(i*h))))) #Faz o valor de x ocupar o "x" da função e faz com que essa string seja computada
 
 print("\n ---------------------------- Entradas ----------------------------\n")
 print("X: ", x)

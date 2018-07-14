@@ -15,7 +15,10 @@ Argumentos:
 	-f(x): função 
 """
 
-#python3 Derivacao.py -x 0.5 -H 0.5 -f 2/x-4
+#python3 Derivacao.py -x 0.5 -H 0.5 -f "(2/x-4)"
+#python3 Derivacao.py -x 0.5 -H 0.25 -f "(-0.1*pow(x,4)-0.15*pow(x,3)-0.5*pow(x,2)-0.25*x+1.2)"
+#python3 Derivacao.py -x 2 -H 0.25 -f "(pow(x,2)-1*2)"
+
 
 import argparse
 import matplotlib.pyplot as plt
@@ -33,11 +36,13 @@ args = vars(ap.parse_args())
 x = args["x"]
 h = float(args["h"])
 f = args["f"]
+f_computada = eval(f.replace("x", str(x))) #Faz o valor de x ocupar o "x" da função e faz com que essa string seja computada
 
 print("\n ---------------------------- Entradas ----------------------------\n")
 print("X: ", x)
 print("H: ", h)
 print("F: ", f)
+print("F computada: ", f_computada)
 
 #assumo que fx contém os valores da função desde fx(x-5), fx(x-4), fx(x-3), fx(x-2), fx(x-1) até fx(x+5)
 fx = np.array([1, 2, 20, 4, 5, 50, 30, 8, 9, 10, 11])

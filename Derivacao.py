@@ -33,19 +33,21 @@ ap.add_argument('-H', "--h", required=True, help="Entrada h")
 ap.add_argument('-f', "--f", required=True, help="Funcao")
 
 args = vars(ap.parse_args())
-x = args["x"]
+x = float(args["x"])
 h = float(args["h"])
 f = args["f"]
-f_computada = eval(f.replace("x", str(x))) #Faz o valor de x ocupar o "x" da função e faz com que essa string seja computada
+
+#assumo que fx contém os valores da função desde fx(x-5) até fx(x+5)
+fx = []
+
+for i in range(-5, 6):
+	fx.append(eval(f.replace("x", str(x+i)))) #Faz o valor de x ocupar o "x" da função e faz com que essa string seja computada
 
 print("\n ---------------------------- Entradas ----------------------------\n")
 print("X: ", x)
 print("H: ", h)
 print("F: ", f)
-print("F computada: ", f_computada)
 
-#assumo que fx contém os valores da função desde fx(x-5), fx(x-4), fx(x-3), fx(x-2), fx(x-1) até fx(x+5)
-fx = np.array([1, 2, 20, 4, 5, 50, 30, 8, 9, 10, 11])
 tam = len(fx)//2
 
 #crio as listas para armazenar as derivadas
